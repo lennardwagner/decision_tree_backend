@@ -5,6 +5,9 @@ const {request, response} = require("express");
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
+const testStore = require('./TestStore');
+
+
 const app = express();
 const port = 3001;
 
@@ -25,13 +28,13 @@ app.get("/sidebar", (request, response) => {
     const sidebar = {
         "node": {
             "className": "Age",
-            "content": "Age", //{"name": "test-node", "attr1": "INT", "attr2":"BOOL"}
-            "data": {"age": [16, 36]},
+            "content": "Age",
+            "data": {"age": [16, 36]}, // (min, max)
             "type": "test"
         },
         "node2": {
-            "className": "Gender",
-            "content": "Gender",
+            "className": "Gender", // currently not used, I think (maybe for css)!
+            "content": "Gender", // only used to display name in sidebar!
             "data": {"gender": ["female", "male"]},
             "type": "test2"
         }
@@ -41,10 +44,10 @@ app.get("/sidebar", (request, response) => {
     console.log("sent sidebar info");
 });
 app.post("/flow", (request, response) => {
-    const data = request.body
-    const filePath = "./storage/db.txt"
-
-    fs.appendFile(filePath, `${JSON.stringify(data, null, 2)}\n`, (err) => {
+    const data = request.body;
+    const filePath = "./storage/db.txt";
+    const trimmedData = testStore(data);
+    fs.appendFile(filePath, `${JSON.stringify(trimmedData, null, 2)}\n`, (err) => {
         if (err) {
             console.error('Error saving JSON data:', err);
             response.status(500).send({ error: 'Error saving JSON data' });
