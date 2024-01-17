@@ -43,6 +43,10 @@ app.get("/sidebar", (request, response) => {
     response.send(sidebar)
     console.log("sent sidebar info");
 });
+
+app.get("/suggestions", (request, response) => {
+    // function call / function to retrieve suggested next nodes goes here.
+})
 app.post("/flow", (request, response) => {
     const data = request.body;
     const filePath = "./storage/db.txt";
