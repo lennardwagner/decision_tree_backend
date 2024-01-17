@@ -18,3 +18,6 @@ async function run() {
     }
 }
 run().catch(console.dir);
+
+// todo: write a function which queries the mongoDB and analyzes the edge connections
+//  to update the map with the frequency of certain connections for recommender function.
