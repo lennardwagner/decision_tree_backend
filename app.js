@@ -9,6 +9,9 @@ const {MongoClient, ObjectId} = require("mongodb");
 const trimStoredData = require('./TestStore');
 const writeToDB = require('./mongoUpdate')
 const queryEdges = require('./mongoConnect')
+const queryNodes = require('./mongoConnect')
+const suggestionMap = require('./SuggestionMap')
+const sidebar = require('./jsons')
 
 const app = express();
 const port = 3001;
@@ -48,33 +51,22 @@ app.get("/status", (request, response) => {
     response.send(status)
 });
 app.get("/sidebar", (request, response) => {
-    const sidebar = {
-        "node": {
-            "className": "Age",
-            "content": "Age",
-            "data": {"age": [16, 36]}, // (min, max)
-            "type": "test"
-        },
-        "node2": {
-            "className": "Gender", // currently not used, I think (maybe for css)!
-            "content": "Gender", // only used to display name in sidebar!
-            "data": {"gender": ["female", "male"]},
-            "type": "test2"
-        }
-    }
-
     response.send(sidebar)
     console.log("sent sidebar info");
 });
 
 app.get("/suggestions", async (request, response) => {
-    const result = await queryEdges();
-    console.log(result)
-    response.status(200).json({ status: "success", suggestions: result });
+    const result = await queryNodes();
+    //console.log(result)
+    const suggestions = suggestionMap(result);
+    // console.log(suggestions)
+    //todo: JSON builder which takes the returned suggestions and builds complete json objects
+    // which look like the one returned by /sidebar
+    response.status(200).json({ status: "success", suggestions: suggestions });
 })
 app.post("/flow", (request, response) => {
     const data = request.body;
-    const trimmedData = trimmedDataJSON(data);
+    const trimmedData = trimStoredData(data);
     const trimmedDataJSON = JSON.parse(JSON.stringify(trimmedData));
     console.log(trimmedDataJSON);
     writeToDB(trimmedDataJSON)
