@@ -9,7 +9,7 @@
 // what most often succeeds it to update suggestions.
 
 // data: POST request.body
-function testStore(data) {
+function trimStoredData(data) {
     let trimmedData = {...data};
     delete trimmedData.viewport;
     delete trimmedData.nodes.forEach(node => {
@@ -30,4 +30,4 @@ function testStore(data) {
     return trimmedData;
 }
 
-module.exports = testStore;
+module.exports = trimStoredData;
