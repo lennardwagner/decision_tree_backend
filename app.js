@@ -11,6 +11,7 @@ const writeToDB = require('./mongoUpdate')
 const queryEdges = require('./mongoConnect')
 const queryNodes = require('./mongoConnect')
 const suggestionMap = require('./SuggestionMap')
+const buildNodeOrder = require('./SuggestionSidebar')
 const sidebar = require('./jsons')
 
 const app = express();
@@ -47,7 +48,6 @@ app.get("/status", (request, response) => {
     const status = {
         "Status": "Running"
     };
-
     response.send(status)
 });
 app.get("/sidebar", (request, response) => {
@@ -59,10 +59,11 @@ app.get("/suggestions", async (request, response) => {
     const result = await queryNodes();
     //console.log(result)
     const suggestions = suggestionMap(result);
-    // console.log(suggestions)
-    //todo: JSON builder which takes the returned suggestions and builds complete json objects
-    // which look like the one returned by /sidebar
-    response.status(200).json({ status: "success", suggestions: suggestions });
+    //console.log(suggestions)
+    const responseObject = buildNodeOrder(suggestions, sidebar);
+    console.log(responseObject)
+    response.send(responseObject);
+    // response.status(200).json({ status: "success", suggestions: suggestions });
 })
 app.post("/flow", (request, response) => {
     const data = request.body;
@@ -70,14 +71,4 @@ app.post("/flow", (request, response) => {
     const trimmedDataJSON = JSON.parse(JSON.stringify(trimmedData));
     console.log(trimmedDataJSON);
     writeToDB(trimmedDataJSON)
-    /*fs.appendFile(filePath, `${JSON.stringify(trimmedData, null, 2)}\n`, (err) => {
-        if (err) {
-            console.error('Error saving JSON data:', err);
-            response.status(500).send({ error: 'Error saving JSON data' });
-        } else {
-            console.log('JSON data saved successfully.');
-            response.status(200).send({ message: 'JSON data saved successfully' });
-        }
-    }
-    ); */
 })

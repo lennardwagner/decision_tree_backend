@@ -1,5 +1,8 @@
-const hashMap = new Map();
+
 function suggestionMap(data) {
+    // map could also be outside of function, this way each time suggestion is requested, the map
+    // is reset and computed from scratch
+    const hashMap = new Map();
     data.forEach(connection => {
         //console.log(connection)
         const connectionString = connection;
