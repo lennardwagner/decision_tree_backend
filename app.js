@@ -12,6 +12,7 @@ const queryEdges = require('./mongoConnect')
 const queryNodes = require('./mongoConnect')
 const suggestionMap = require('./SuggestionMap')
 const buildNodeOrder = require('./SuggestionSidebar')
+const LeafAndPathFinder = require('./LeafAndPathFinder')
 const sidebar = require('./jsons')
 
 const app = express();
@@ -65,10 +66,12 @@ app.get("/suggestions", async (request, response) => {
     response.send(responseObject);
     // response.status(200).json({ status: "success", suggestions: suggestions });
 })
-app.post("/flow", (request, response) => {
+/*Post-method to export a created decision tree to the backend for storing and analyzing*/
+app.post("/flow", async (request, response) => {
     const data = request.body;
     const trimmedData = trimStoredData(data);
     const trimmedDataJSON = JSON.parse(JSON.stringify(trimmedData));
     console.log(trimmedDataJSON);
-    writeToDB(trimmedDataJSON)
+    await writeToDB(trimmedDataJSON);
+    //LeafAndPathFinder(trimmedDataJSON);
 })
