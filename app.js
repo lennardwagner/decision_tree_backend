@@ -12,7 +12,9 @@ const queryEdges = require('./mongoConnect')
 const queryNodes = require('./mongoConnect')
 const suggestionMap = require('./SuggestionMap')
 const buildNodeOrder = require('./SuggestionSidebar')
-const LeafAndPathFinder = require('./LeafAndPathFinder')
+const { LeafAndPathFinder, ExtractLabelsFromPaths} = require('./LeafAndPathFinder')
+
+const ArrayToJson = require('./ArrayToJSON')
 const sidebar = require('./jsons')
 
 const app = express();
@@ -62,16 +64,20 @@ app.get("/suggestions", async (request, response) => {
     const suggestions = suggestionMap(result);
     //console.log(suggestions)
     const responseObject = buildNodeOrder(suggestions, sidebar);
-    console.log(responseObject)
+    //console.log(responseObject)
     response.send(responseObject);
-    // response.status(200).json({ status: "success", suggestions: suggestions });
+    //response.status(200).json({ status: "success", suggestions: suggestions });
 })
 /*Post-method to export a created decision tree to the backend for storing and analyzing*/
 app.post("/flow", async (request, response) => {
     const data = request.body;
     const trimmedData = trimStoredData(data);
     const trimmedDataJSON = JSON.parse(JSON.stringify(trimmedData));
-    console.log(trimmedDataJSON);
-    await writeToDB(trimmedDataJSON);
-    //LeafAndPathFinder(trimmedDataJSON);
+    //console.log(trimmedDataJSON);
+    //await writeToDB(trimmedDataJSON);
+    const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []); // logging call in ArrayToJSON.js
+    const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
+    const filterObject = ArrayToJson(filterArray);
+    console.log(JSON.stringify(filterObject, null, 2));
+    const pause = 2;
 })

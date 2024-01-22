@@ -120,6 +120,12 @@ const testTree = {
         }
     ]
 };
+/*
+tree: JSON object representing the nodes and edges
+nodeId: root node of the tree
+currentPath: stores the path, pass empty Array
+result: currentPath: stores the result, pass empty Array
+ */
 function LeafAndPathFinder(tree, nodeId, currentPath, result) {
     const node = tree.nodes.find(n => n.id === nodeId)
     if (!node) {return;}
@@ -145,7 +151,7 @@ function LeafAndPathFinder(tree, nodeId, currentPath, result) {
 const result = LeafAndPathFinder(testTree, "1", [], [])
 //console.log(result)
 
-function extractLabelsFromPaths(tree, paths) {
+function ExtractLabelsFromPaths(tree, paths) {
     const stop = ""
     return paths.map((path) => {
         const labels = [];
@@ -164,13 +170,13 @@ function extractLabelsFromPaths(tree, paths) {
         return labels;
     });
 }
-// const nestedLabels = extractLabelsFromPaths(testTree, result.map((result2) => result2.path));
+const nestedLabels = ExtractLabelsFromPaths(testTree, result.map((result2) => result2.path));
 //result.map((result2) => console.log(result2.path))
 //console.log(ToJSON(nestedLabels));
 //nestedLabels.forEach(x => console.log(x));
 
 //console.log(result)
 //for (const i of result) {console.log(i)}
-module.exports = LeafAndPathFinder;
+module.exports = {LeafAndPathFinder,ExtractLabelsFromPaths};
 
 

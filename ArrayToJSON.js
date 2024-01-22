@@ -12,7 +12,7 @@ function ToJSON(data) {
     return data.map(filterRow => {
         const filterJSON = {};
             filterRow.forEach(([value, key]) => {
-                    console.log(key, value)
+                    // console.log(key, value)
                     filterJSON[key] = {};
                     if (key === 'geschlecht') {
                         filterJSON[key] = value;
@@ -36,10 +36,11 @@ function ToJSON(data) {
                     }
                 }
             );
+        //console.log(filterJSON)
         return filterJSON;
     });
 }
-// const result = ToJSON(array2);
-//console.log(result);
+const result = ToJSON(array2);
+console.log(result);
 
 module.exports = ToJSON;
