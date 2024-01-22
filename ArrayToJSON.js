@@ -5,7 +5,7 @@ array = [
     [ [ '>33', 'Node 1' ] ]
 ]
 array2 = [
-    [ [ '>30', 'alter' ], [ 'männlich', 'geschlecht' ] ],
+    [ [ 'männlich', 'geschlecht' ], [ '>30', 'alter' ], [ 'NO LABEL', 'gewicht' ] ],
     [ [ '<=25', 'alter' ], [ '>=50', 'gewicht' ] ],
 ]
 function ToJSON(data) {
@@ -13,6 +13,10 @@ function ToJSON(data) {
         const filterJSON = {};
             filterRow.forEach(([value, key]) => {
                     // console.log(key, value)
+                    if (value === 'NO LABEL') {
+                        console.log("No Label")
+                        return;
+                    }
                     filterJSON[key] = {};
                     if (key === 'geschlecht') {
                         filterJSON[key] = value;

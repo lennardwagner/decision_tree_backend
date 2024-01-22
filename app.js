@@ -53,14 +53,19 @@ app.post("/flow", async (request, response) => {
     const trimmedData = trimStoredData(data);
     const trimmedDataJSON = JSON.parse(JSON.stringify(trimmedData));
     //console.log(trimmedDataJSON);
-    //await writeToDB(trimmedDataJSON);
+    await writeToDB(trimmedDataJSON);
+    // todo: Remove elements where label is empty so that empty string wont be queried in the DB
     const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []); // logging call in ArrayToJSON.js
     const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
+    //console.log(leavesAndPaths)
     const filterObject = ArrayToJson(filterArray);
     //console.log(JSON.stringify(filterObject, null, 2));
     const resultObject = await resultQuery(filterObject)
     // todo: Works (I think), but filters right now lead to empty result set as 'Node 1' is not part of the collection.
-    console.log(JSON.stringify(resultObject, null, 2));
+    //console.log(JSON.stringify(resultObject, null, 2));
 
     response.json(resultObject)
+})
+app.get("/currentsuggestion", async (request, response) => {
+
 })

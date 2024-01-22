@@ -148,9 +148,6 @@ function LeafAndPathFinder(tree, nodeId, currentPath, result) {
     return result;
 }
 
-const result = LeafAndPathFinder(testTree, "1", [], [])
-//console.log(result)
-
 function ExtractLabelsFromPaths(tree, paths) {
     const stop = ""
     return paths.map((path) => {
@@ -164,15 +161,18 @@ function ExtractLabelsFromPaths(tree, paths) {
             if (edge && edge.label) {
                 labels.push([edge.label,
                     path[i][1]]
-                );
-            } else {labels.push(["NO LABEL", path[i][1]])}
+                );}
+            else if (edge.label === "") {labels.push(["NO LABEL", path[i][1]])}
+            else {labels.push(["NO LABEL", path[i][1]])}
         }
         return labels;
     });
 }
+const result = LeafAndPathFinder(testTree, "1", [], [])
+//console.log(result)
 const nestedLabels = ExtractLabelsFromPaths(testTree, result.map((result2) => result2.path));
 //result.map((result2) => console.log(result2.path))
-//console.log(ToJSON(nestedLabels));
+console.log(ToJSON(nestedLabels));
 //nestedLabels.forEach(x => console.log(x));
 
 //console.log(result)
