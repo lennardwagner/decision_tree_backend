@@ -13,34 +13,13 @@ const queryNodes = require('./mongoConnect')
 const suggestionMap = require('./SuggestionMap')
 const buildNodeOrder = require('./SuggestionSidebar')
 const { LeafAndPathFinder, ExtractLabelsFromPaths} = require('./LeafAndPathFinder')
-
 const ArrayToJson = require('./ArrayToJSON')
+const resultQuery = require('./mongoResultQuery')
 const sidebar = require('./jsons')
 
 const app = express();
 const port = 3001;
 
-const url = 'mongodb://localhost:27017/testDB';
-const client = new MongoClient(url);
-// ===========================DB TEST========================================
-/*
-async function run() {
-    try {
-        await client.connect();
-        const database = client.db('testDB');
-        const content = database.collection('decisionTree');
-
-        const query = {_id: new ObjectId('65a2a0cecd4ec77d85b61b48')};
-        const result = await content.findOne(query);
-
-        console.log(JSON.stringify(result, null, 2));
-    } finally {
-        await client.close();
-    }
-}
-run().catch(console.dir);
-*/
-// ==========================================================================
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -78,6 +57,10 @@ app.post("/flow", async (request, response) => {
     const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []); // logging call in ArrayToJSON.js
     const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
     const filterObject = ArrayToJson(filterArray);
-    console.log(JSON.stringify(filterObject, null, 2));
-    const pause = 2;
+    //console.log(JSON.stringify(filterObject, null, 2));
+    const resultObject = await resultQuery(filterObject)
+    // todo: Works (I think), but filters right now lead to empty result set as 'Node 1' is not part of the collection.
+    console.log(JSON.stringify(resultObject, null, 2));
+
+    response.json(resultObject)
 })

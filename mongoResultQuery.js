@@ -11,7 +11,7 @@ const queryObject = [
     }
 ]
 
-async function queryCollection(queryObject) {
+async function resultQuery(queryObject) {
     const url = 'mongodb://localhost:27017/testDB';
     const client = new MongoClient(url);
     try {
@@ -28,9 +28,4 @@ async function queryCollection(queryObject) {
         await client.close();
     }
 }
-queryCollection(queryObject)
-    .then(results => {
-        console.log(results);
-        // Send 'results' back to the frontend for display
-    })
-    .catch(err => console.error(err));
+module.exports = resultQuery;
