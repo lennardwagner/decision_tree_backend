@@ -8,9 +8,8 @@ const {MongoClient, ObjectId} = require("mongodb");
 
 const trimStoredData = require('./TestStore');
 const writeToDB = require('./mongoUpdate')
-const queryEdges = require('./mongoConnect')
-const queryNodes = require('./mongoConnect')
-const suggestionMap = require('./SuggestionMap')
+const { queryEdges, queryNodes } = require('./mongoConnect')
+const { suggestionMap, currentSuggestionMap } = require('./SuggestionMap')
 const buildNodeOrder = require('./SuggestionSidebar')
 const { LeafAndPathFinder, ExtractLabelsFromPaths} = require('./LeafAndPathFinder')
 const ArrayToJson = require('./ArrayToJSON')
@@ -23,6 +22,7 @@ const port = 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
+let lastNode = ""
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });
@@ -65,9 +65,24 @@ app.post("/flow", async (request, response) => {
 
     response.json(resultObject)
 })
+// To return a suggestion, the last dropped node needs to be passed from the frontend
+
+app.post("/sendlastnode", async (request, response) => {
+    const data = request.body;
+    lastNode = data;
+    console.log("Last node received: " + JSON.stringify(data.nodeLabel, null, 2));
+    response.status(200).send("Data received successfully");
+});
 app.get("/currentsuggestion", async (request, response) => {
-    result = await queryEdges();
-    // todo: call mabBuilder here!
-    console.log(result)
-    response.send(result)
-})
+    console.log("called current suggestion")
+    const result = await queryEdges();
+    const currentMap = currentSuggestionMap(result)
+    if (lastNode !== "") {
+        const suggestions = currentMap.get(lastNode.nodeLabel)
+        const responseObject =  buildNodeOrder(suggestions, sidebar);
+        console.log("Sending the following suggestion: " + responseObject)
+        response.send(responseObject)
+    } else {
+        response.send({})
+    }
+});

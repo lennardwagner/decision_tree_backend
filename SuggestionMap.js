@@ -1,5 +1,15 @@
+testEdges = [
+    [ 'Node 2', 'Gender' ],   [ 'Gender', 'Age' ],      [ 'Node 2', 'Gender' ],
+    [ 'Node 2', 'Gender' ],   [ 'Gender', 'Gender' ],   [ 'Gender', 'Gender' ],
+    [ 'Gender', 'Age' ],      [ 'Gender', 'Age' ],      [ 'Node 2', 'Größe' ],
+    [ 'Node 2', 'Größe' ],    [ 'Größe', 'Gewicht' ],   [ 'Größe', 'Gewicht' ],
+    [ 'Node 3', 'A' ],        [ 'Node 3', 'A' ],        [ 'Node 3', 'Gewicht' ],
+    [ 'Node 3', 'Gewicht' ],  [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ],
+    [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ],
+    [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ],
+    [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ], [ 'Node 2', 'Größe' ]];
 
-function suggestionMap(data) {
+    function suggestionMap(data) {
     // map could also be outside of function, this way each time suggestion is requested, the map
     // is reset and computed from scratch
     const hashMap = new Map();
@@ -23,5 +33,25 @@ function suggestionMap(data) {
         return sortedMap.slice(0, 5);
 
 }
-
-module.exports = suggestionMap;
+function currentSuggestionMap(edges) {
+    const connectionMap = new Map;
+    edges.forEach(([source, target]) => {
+        if (!connectionMap.has(source)) {
+            connectionMap.set(source, []);
+        }
+        const existingConnection = connectionMap.get(source).find(
+            ([targetNode]) => targetNode === target);
+        if (existingConnection !== undefined) {
+            // If it exists, increment the frequency
+            existingConnection[1]++;
+        } else {
+            // If it doesn't exist, add a new entry with frequency 1
+            connectionMap.get(source).push([target, 1]);
+        }
+    });
+    //console.log(connectionMap)
+    return connectionMap;
+}
+//result = currentSuggestionMap(testEdges);
+//    console.log(result)
+module.exports = {suggestionMap, currentSuggestionMap};

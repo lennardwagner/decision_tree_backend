@@ -25,13 +25,14 @@ async function queryEdges() {
             return edges.map(({ data }) => data);
         });
         result = trimQueryEdges(cleanedResult)
+        //console.log(result)
         //console.log(JSON.stringify(cleanedResult, null, 2))
         //console.log(JSON.stringify(result, null, 2));
         //console.log(result)
     } finally {
         await client.close();
     }
-    //console.log(result)
+
     return result;
 }
 async function queryNodes() {
@@ -58,6 +59,7 @@ async function queryNodes() {
     } finally {
         await client.close();
     }
+    //console.log(result)
     return result;
 }
 
@@ -69,5 +71,5 @@ async function queryNodes() {
 //const result = queryEdges()
 //console.log(result)
 //queryNodes().catch(console.dir);
-module.exports = queryEdges;
-module.exports = queryNodes;
+module.exports = {queryEdges, queryNodes};
+
