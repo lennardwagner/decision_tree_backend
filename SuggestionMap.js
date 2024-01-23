@@ -17,9 +17,9 @@ function suggestionMap(data) {
             hashMap.set(connectionString, 1);
         }
     });
-        console.log(hashMap)
+        //console.log(hashMap)
         const sortedMap = Array.from(hashMap.entries()).sort((a, b) => b[1] - a[1]);
-        console.log(sortedMap)
+        //console.log(sortedMap)
         return sortedMap.slice(0, 5);
 
 }

@@ -54,7 +54,6 @@ app.post("/flow", async (request, response) => {
     const trimmedDataJSON = JSON.parse(JSON.stringify(trimmedData));
     //console.log(trimmedDataJSON);
     await writeToDB(trimmedDataJSON);
-    // todo: Remove elements where label is empty so that empty string wont be queried in the DB
     const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []); // logging call in ArrayToJSON.js
     const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
     //console.log(leavesAndPaths)
@@ -67,5 +66,8 @@ app.post("/flow", async (request, response) => {
     response.json(resultObject)
 })
 app.get("/currentsuggestion", async (request, response) => {
-
+    result = await queryEdges();
+    // todo: call mabBuilder here!
+    console.log(result)
+    response.send(result)
 })

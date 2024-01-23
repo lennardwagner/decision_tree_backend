@@ -3,7 +3,6 @@ const {MongoClient, ObjectId} = require("mongodb");
 const trimQueryEdges = require('./TrimQuery')
 const trimQueryNodes = require('./TrimQuery')
 
-
 const url = 'mongodb://localhost:27017/testDB';
 const client = new MongoClient(url);
 
@@ -18,7 +17,6 @@ async function queryEdges() {
             edges: 1
         };
         result = await content.find({}, { projection }).toArray();
-        console.log(result)
         const cleanedResult = result.map(({ _id, edges}) => {
             const cleanedEdges = edges.map(({ id, source, target, data }) => ({ id, source, target, data }));
             return { _id, edges: cleanedEdges };
@@ -33,6 +31,7 @@ async function queryEdges() {
     } finally {
         await client.close();
     }
+    //console.log(result)
     return result;
 }
 async function queryNodes() {
@@ -48,7 +47,7 @@ async function queryNodes() {
         const cleanedResult = result.flatMap(({ nodes }) => {
             //console.log(Object.values(nodes))
             const dataValues = Object.values(nodes).map(x => Object.values(x.data));
-            console.log(dataValues)
+            //console.log(dataValues)
             return dataValues;
         });
 
@@ -61,6 +60,14 @@ async function queryNodes() {
     }
     return result;
 }
-queryNodes().catch(console.dir);
+
+
+
+//   const test = await queryEdges().catch(console.dir);
+//    return test;
+//}
+//const result = queryEdges()
+//console.log(result)
+//queryNodes().catch(console.dir);
 module.exports = queryEdges;
 module.exports = queryNodes;

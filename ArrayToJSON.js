@@ -14,7 +14,7 @@ function ToJSON(data) {
             filterRow.forEach(([value, key]) => {
                     // console.log(key, value)
                     if (value === 'NO LABEL') {
-                        console.log("No Label")
+                        // console.log("No Label")
                         return;
                     }
                     filterJSON[key] = {};
@@ -44,7 +44,7 @@ function ToJSON(data) {
         return filterJSON;
     });
 }
-const result = ToJSON(array2);
-console.log(result);
+//const result = ToJSON(array2);
+//console.log(result);
 
 module.exports = ToJSON;

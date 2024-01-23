@@ -172,7 +172,7 @@ const result = LeafAndPathFinder(testTree, "1", [], [])
 //console.log(result)
 const nestedLabels = ExtractLabelsFromPaths(testTree, result.map((result2) => result2.path));
 //result.map((result2) => console.log(result2.path))
-console.log(ToJSON(nestedLabels));
+//console.log(ToJSON(nestedLabels));
 //nestedLabels.forEach(x => console.log(x));
 
 //console.log(result)

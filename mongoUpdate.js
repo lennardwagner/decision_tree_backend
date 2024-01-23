@@ -11,7 +11,7 @@ async function writeToDB(file) {
 
         const result = await content.insertOne(file);
 
-        console.log(JSON.stringify(result, null, 2));
+        //console.log(JSON.stringify(result, null, 2));
     } finally {
         await client.close();
     }
