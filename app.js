@@ -79,9 +79,10 @@ app.get("/currentsuggestion", async (request, response) => {
     const currentMap = currentSuggestionMap(result)
     if (lastNode !== "") {
         const suggestions = currentMap.get(lastNode.nodeLabel)
+        if (suggestions === undefined) {response.send({})} else {
         const responseObject =  buildNodeOrder(suggestions, sidebar);
         console.log("Sending the following suggestion: " + responseObject)
-        response.send(responseObject)
+        response.send(responseObject) }
     } else {
         response.send({})
     }

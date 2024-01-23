@@ -1,14 +1,14 @@
 const sidebar = {
     "node": {
-        "className": "Age",
-        "content": "Age",
-        "data": {"age": [16, 36]}, // (min, max)
+        "className": "Alter",
+        "content": "Alter",
+        "data": {"Alter": [16, 36]}, // (min, max)
         "type": "test"
     },
     "node2": {
-        "className": "Gender", // currently not used, I think (maybe for css)!
-        "content": "Gender", // only used to display name in sidebar!
-        "data": {"gender": ["female", "male"]},
+        "className": "Geschlecht", // currently not used, I think (maybe for css)!
+        "content": "Geschlecht", // only used to display name in sidebar!
+        "data": {"Geschlecht": ["w", "m"]},
         "type": "test2"
     },
     "node3": {
@@ -26,7 +26,7 @@ const sidebar = {
     "node5": {
         "className": "EOF", // currently not used, I think (maybe for css)!
         "content": "EOF", // only used to display name in sidebar!
-        "data": null,
+        "data": "null",
         "type": "test5"
     }
 };

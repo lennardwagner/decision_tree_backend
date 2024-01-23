@@ -11,7 +11,7 @@ function buildNodeOrder(nodeArray, sidebarObject) {
     // iterate over nodeArray and find the corresponding object in sidebarObject
     // -> add to node order
     const nodeOrder = {};
-
+    console.log(nodeArray)
     nodeArray.forEach(node => {
         for (const key in sidebarObject) {
             if (sidebarObject[key]["className"] == node[0]) {
