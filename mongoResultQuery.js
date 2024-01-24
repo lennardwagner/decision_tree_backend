@@ -23,9 +23,11 @@ async function resultQuery(queryObject) {
             const result = await collection.find(query).toArray();
             resultsArray.push(result);
         }
+        resultsArray.map((element, ind1)=>element.map((ele2, ind2)=>console.log(ind1, ind2, ele2)));
         return resultsArray;
     } finally {
         await client.close();
     }
 }
+resultQuery(queryObject);
 module.exports = resultQuery;
