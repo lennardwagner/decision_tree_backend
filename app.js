@@ -53,7 +53,7 @@ app.post("/flow", async (request, response) => {
     const trimmedData = trimStoredData(data);
     const trimmedDataJSON = JSON.parse(JSON.stringify(trimmedData));
     //console.log(trimmedDataJSON);
-    await writeToDB(trimmedDataJSON);
+    await writeToDB(file = trimmedDataJSON, collection = "decisionTree");
     const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []); // logging call in ArrayToJSON.js
     const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
     //console.log(leavesAndPaths)
@@ -65,23 +65,32 @@ app.post("/flow", async (request, response) => {
 
     response.json(resultObject)
 })
-// To return a suggestion, the last dropped node needs to be passed from the frontend
+app.post("/treeconstruction", async (request, response) => {
+    const data = request.body;
+    data.timestamp = String(new Date());
+    console.log(data);
+    writeToDB(file = data, collection = "TreeConstructionSteps");
+    response.status(200).send("Data received successfully");
+})
 
+/** To return a suggestion, the last dropped node needs to be passed from the frontend */
 app.post("/sendlastnode", async (request, response) => {
     const data = request.body;
-    lastNode = data;
-    console.log("Last node received: " + JSON.stringify(data.nodeLabel, null, 2));
+    if (data.nodeLabel !== "EOF") {
+        lastNode = data;
+        //console.log("Last node received: " + JSON.stringify(data.nodeLabel, null, 2));
+    }
     response.status(200).send("Data received successfully");
 });
 app.get("/currentsuggestion", async (request, response) => {
-    console.log("called current suggestion")
+    //console.log("called current suggestion")
     const result = await queryEdges();
     const currentMap = currentSuggestionMap(result)
     if (lastNode !== "") {
         const suggestions = currentMap.get(lastNode.nodeLabel)
         if (suggestions === undefined) {response.send({})} else {
         const responseObject =  buildNodeOrder(suggestions, sidebar);
-        console.log("Sending the following suggestion: " + responseObject)
+        //console.log("Sending the following suggestion: " + responseObject)
         response.send(responseObject) }
     } else {
         response.send({})
