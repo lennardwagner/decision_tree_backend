@@ -22,6 +22,8 @@ function LeafAndPathFinder(tree, nodeId, currentPath, result) {
         }
     }
     currentPath.pop();
+    //sort array by id asc
+    result.sort((a, b) => parseFloat(a.leafNodeId) - parseFloat(b.leafNodeId));
     return result;
 }
 
