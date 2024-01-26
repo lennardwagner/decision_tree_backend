@@ -1,3 +1,4 @@
+/* --- for testing ---
 const sidebar = require('./jsons')
 const suggestions = [
     [ 'Gender', 5 ],
@@ -5,7 +6,7 @@ const suggestions = [
     [ 'Node 2', 4 ],
     [ 'Age', 3 ],
     [ 'Node 3', 2 ]
-]
+]*/
 
 function buildNodeOrder(nodeArray, sidebarObject) {
     // iterate over nodeArray and find the corresponding object in sidebarObject
@@ -21,8 +22,6 @@ function buildNodeOrder(nodeArray, sidebarObject) {
             }
         }
     })
-    //console.log(nodeOrder, typeof nodeOrder)
-    //console.log(JSON.stringify(nodeOrder, null, 2))
     return JSON.stringify(nodeOrder, null, 2);
 }
 //buildNodeOrder(suggestions, sidebar)
