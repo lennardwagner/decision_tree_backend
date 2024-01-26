@@ -145,6 +145,8 @@ function LeafAndPathFinder(tree, nodeId, currentPath, result) {
     }
 
     currentPath.pop();
+    //sort array by id asc
+    result.sort((a, b) => parseFloat(a.leafNodeId) - parseFloat(b.leafNodeId));
     return result;
 }
 
@@ -171,7 +173,7 @@ function ExtractLabelsFromPaths(tree, paths) {
 const result = LeafAndPathFinder(testTree, "1", [], [])
 //console.log(result)
 const nestedLabels = ExtractLabelsFromPaths(testTree, result.map((result2) => result2.path));
-//result.map((result2) => console.log(result2.path))
+result.map((result2) => console.log(result2))
 //console.log(ToJSON(nestedLabels));
 //nestedLabels.forEach(x => console.log(x));
 
