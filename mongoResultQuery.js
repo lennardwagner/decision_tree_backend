@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-
+/*
 const queryObject = [
     {
         alter: { '$gt': 30 },
@@ -10,6 +10,7 @@ const queryObject = [
         gewicht: { '$gte': 50 }
     }
 ]
+*/
 
 async function resultQuery(queryObject) {
     const url = 'mongodb://localhost:27017/testDB';
@@ -20,6 +21,7 @@ async function resultQuery(queryObject) {
         const collection = db.collection('Athletes');
         const resultsArray = [];
         for (const query of queryObject) {
+            console.log("FILTER: " + JSON.stringify(query, null, 2))
             const result = await collection.find(query).toArray();
             resultsArray.push(result);
         }
@@ -29,5 +31,4 @@ async function resultQuery(queryObject) {
         await client.close();
     }
 }
-resultQuery(queryObject);
 module.exports = resultQuery;

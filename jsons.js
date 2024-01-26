@@ -49,10 +49,17 @@ const sidebar = {
         "category": "training"
     },
     "node8": {
+        "className": "Bankdrücken", // currently not used, I think (maybe for css)!
+        "content": "Bankdrücken", // only used to display name in sidebar!
+        "data": {"Bankdrücken": [40,200]},
+        "type": "test8",
+        "category": "training"
+    },
+    "node9": {
         "className": "IQ", // currently not used, I think (maybe for css)!
         "content": "IQ", // only used to display name in sidebar!
         "data": {"IQ": [70,130]},
-        "type": "test8",
+        "type": "test9",
         "category": "cognition"
     }
 };

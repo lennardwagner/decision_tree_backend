@@ -34,7 +34,8 @@ app.get("/status", (request, response) => {
 });
 app.get("/sidebar", (request, response) => {
     response.send(sidebar)
-    console.log("sent sidebar info");
+    console.log(Date.now(), "sent sidebar info");
+
 });
 
 app.get("/suggestions", async (request, response) => {
@@ -52,23 +53,22 @@ app.post("/flow", async (request, response) => {
     const data = request.body;
     const trimmedData = trimStoredData(data);
     const trimmedDataJSON = JSON.parse(JSON.stringify(trimmedData));
-    //console.log(trimmedDataJSON);
-    await writeToDB(file = trimmedDataJSON, collection = "decisionTree");
-    const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []); // logging call in ArrayToJSON.js
-    const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
-    //console.log(leavesAndPaths)
-    const filterObject = ArrayToJson(filterArray);
-    //console.log(JSON.stringify(filterObject, null, 2));
-    const resultObject = await resultQuery(filterObject)
-    // todo: Works (I think), but filters right now lead to empty result set as 'Node 1' is not part of the collection.
-    //console.log(JSON.stringify(resultObject, null, 2));
 
-    response.json(resultObject)
+    await writeToDB(file = trimmedDataJSON, collection = "decisionTree");
+    const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []);
+    // only EOF nodes are valid leafs.
+    const validLeafs = leavesAndPaths.filter(item => item.path.length > 0 && item.path[item.path.length - 1][1] === "EOF");
+    const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
+    const filterObject = ArrayToJson(filterArray);
+
+    const resultObject = await resultQuery(filterObject)
+
+    response.json(resultObject);
 })
 app.post("/treeconstruction", async (request, response) => {
     const data = request.body;
     data.timestamp = String(new Date());
-    console.log(data);
+    //console.log(data);
     writeToDB(file = data, collection = "TreeConstructionSteps");
     response.status(200).send("Data received successfully");
 })
