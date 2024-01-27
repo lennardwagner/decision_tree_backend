@@ -56,8 +56,8 @@ app.post("/flow", async (request, response) => {
 
     await writeToDB(file = trimmedDataJSON, collection = "decisionTree");
     const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []);
-    // only EOF nodes are valid leafs.
-    const validLeafs = leavesAndPaths.filter(item => item.path.length > 0 && item.path[item.path.length - 1][1] === "EOF");
+    // only Result nodes are valid leafs.
+    const validLeafs = leavesAndPaths.filter(item => item.path.length > 0 && item.path[item.path.length - 1][1] === "Results");
     const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
     const filterObject = ArrayToJson(filterArray);
 
@@ -76,7 +76,7 @@ app.post("/treeconstruction", async (request, response) => {
 /** To return a suggestion, the last dropped node needs to be passed from the frontend */
 app.post("/sendlastnode", async (request, response) => {
     const data = request.body;
-    if (data.nodeLabel !== "EOF") {
+    if (data.nodeLabel !== "Results") {
         lastNode = data;
         //console.log("Last node received: " + JSON.stringify(data.nodeLabel, null, 2));
     }
