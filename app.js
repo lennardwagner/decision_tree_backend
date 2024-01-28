@@ -43,6 +43,21 @@ app.get("/suggestions", async (request, response) => {
     const responseObject = buildNodeOrder(suggestions, sidebar);
     response.send(responseObject);
 });
+
+/** Sends suggestion nodes to the front end if (!) at least 1 node has been dropped in the front end */
+app.get("/currentsuggestion", async (request, response) => {
+    const result = await queryEdges();
+    const currentMap = currentSuggestionMap(result);
+    if (lastNode !== "") {
+        const suggestions = currentMap.get(lastNode.nodeLabel)
+        if (suggestions === undefined) {response.send({})} else {
+            const responseObject =  buildNodeOrder(suggestions, sidebar);
+            response.send(responseObject) }
+    } else {
+        response.send({})
+    }
+});
+
 /** Export a created decision tree to the backend for storing and analyzing */
 app.post("/flow", async (request, response) => {
     const data = request.body;
@@ -75,18 +90,4 @@ app.post("/sendlastnode", async (request, response) => {
         lastNode = data;
     }
     response.status(200).send("Data received successfully");
-});
-
-/** Sends suggestion nodes to the front end if (!) at least 1 node has been dropped in the front end */
-app.get("/currentsuggestion", async (request, response) => {
-    const result = await queryEdges();
-    const currentMap = currentSuggestionMap(result);
-    if (lastNode !== "") {
-        const suggestions = currentMap.get(lastNode.nodeLabel)
-        if (suggestions === undefined) {response.send({})} else {
-        const responseObject =  buildNodeOrder(suggestions, sidebar);
-        response.send(responseObject) }
-    } else {
-        response.send({})
-    }
 });
