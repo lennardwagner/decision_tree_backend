@@ -9,7 +9,7 @@ function ToJSON(data) {
                     return;
                 }
                 filterJSON[key] = {};
-                if (key === 'geschlecht') {
+                if (key === 'sex') {
                     filterJSON[key] = value;
                     return;
                 }
@@ -34,7 +34,6 @@ function ToJSON(data) {
                     case '!':
                         filterJSON[key]['$ne'] = Number(value.slice(2));
                         break
-
                 }
         });
         return filterJSON;

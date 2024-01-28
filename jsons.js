@@ -3,28 +3,24 @@ const sidebar = {
         "className": "Age",
         "content": "Age",
         "data": {"Age": [15, 35]}, // (min, max)
-        "type": "test",
         "category": "physiology"
     },
     "node2": {
         "className": "Sex", // currently not used, I think (maybe for css)!
         "content": "Sex", // only used to display name in sidebar!
         "data": {"Sex": ["male", "female"]},
-        "type": "test2",
         "category": "physiology"
     },
     "node3": {
         "className": "Weight", // currently not used, I think (maybe for css)!
         "content": "Weight",
         "data": {"Weight": [50,150]}, // Kg
-        "type": "test3",
         "category": "physiology"
     },
     "node4": {
         "className": "Height",
         "content": "Height",
         "data": {"Height": [145,220]}, // centimeters
-        "type": "test4",
         "category": "physiology"
     },
     "node5": {
@@ -58,8 +54,7 @@ const sidebar = {
     "node9": {
         "className": "IQ",
         "content": "IQ",
-        "data": {"IQ": [70,130]},
-        "type": "test9",
+        "data": {"IQ": [70,130]}, // IQ
         "category": "cognition"
     },
     "node10": {
@@ -73,21 +68,18 @@ const sidebar = {
         "className": "Reaction Time",
         "content": "Reaction Time",
         "data": {"Reaction Time": [100,350]}, // visual
-        "type": "test11",
         "category": "training"
     },
     "node12": {
         "className": "Vitamin D",
         "content": "Vitamin D",
         "data": {"Vitamin D": [20,50]}, // ng/mL
-        "type": "test12",
         "category": "physiology"
     },
     "node13": {
         "className": "Peak Heartrate",
         "content": "Peak Heartrate",
         "data": {"Peak Heartrate": [150,200]}, // bpm
-        "type": "test13",
         "category": "physiology"
     },
 };

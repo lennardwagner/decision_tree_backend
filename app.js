@@ -3,9 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const {request, response} = require("express");
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const {MongoClient, ObjectId} = require("mongodb");
-
 const trimStoredData = require('./TestStore');
 const writeToDB = require('./mongoUpdate')
 const { queryEdges, queryNodes } = require('./mongoConnect')
@@ -32,23 +29,21 @@ app.get("/status", (request, response) => {
     };
     response.send(status)
 });
+/** Returns the sidebar json to the front end */
 app.get("/sidebar", (request, response) => {
     response.send(sidebar)
-    console.log(Date.now(), "sent sidebar info");
-
+    console.log("sent sidebar info");
 });
 
+/** Returns suggested nodes to the front end
+ * !!! Currently not implemented in front end !!! */
 app.get("/suggestions", async (request, response) => {
     const result = await queryNodes();
-    //console.log(result)
     const suggestions = suggestionMap(result);
-    //console.log(suggestions)
     const responseObject = buildNodeOrder(suggestions, sidebar);
-    //console.log(responseObject)
     response.send(responseObject);
-    //response.status(200).json({ status: "success", suggestions: suggestions });
-})
-/*Post-method to export a created decision tree to the backend for storing and analyzing*/
+});
+/** Export a created decision tree to the backend for storing and analyzing */
 app.post("/flow", async (request, response) => {
     const data = request.body;
     const trimmedData = trimStoredData(data);
@@ -57,7 +52,7 @@ app.post("/flow", async (request, response) => {
     await writeToDB(file = trimmedDataJSON, collection = "decisionTree");
     const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []);
     // only Result nodes are valid leafs.
-    const validLeafs = leavesAndPaths.filter(item => item.path.length > 0 && item.path[item.path.length - 1][1] === "Results");
+    // const validLeafs = leavesAndPaths.filter(item => item.path.length > 0 && item.path[item.path.length - 1][1] === "Results");
     const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
     const filterObject = ArrayToJson(filterArray);
 
@@ -82,15 +77,15 @@ app.post("/sendlastnode", async (request, response) => {
     }
     response.status(200).send("Data received successfully");
 });
+
+/** Sends suggestion nodes to the front end if (!) at least 1 node has been dropped in the front end */
 app.get("/currentsuggestion", async (request, response) => {
-    //console.log("called current suggestion")
     const result = await queryEdges();
-    const currentMap = currentSuggestionMap(result)
+    const currentMap = currentSuggestionMap(result);
     if (lastNode !== "") {
         const suggestions = currentMap.get(lastNode.nodeLabel)
         if (suggestions === undefined) {response.send({})} else {
         const responseObject =  buildNodeOrder(suggestions, sidebar);
-        //console.log("Sending the following suggestion: " + responseObject)
         response.send(responseObject) }
     } else {
         response.send({})
