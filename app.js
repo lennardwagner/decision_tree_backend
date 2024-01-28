@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const {request, response} = require("express");
 const bodyParser = require('body-parser');
-const trimStoredData = require('./TestStore');
+const trimStoredData = require('./TrimmData');
 const writeToDB = require('./mongoUpdate')
 const { queryEdges, queryNodes } = require('./mongoConnect')
 const { suggestionMap, currentSuggestionMap } = require('./SuggestionMap')
@@ -73,7 +73,6 @@ app.post("/sendlastnode", async (request, response) => {
     const data = request.body;
     if (data.nodeLabel !== "Results") {
         lastNode = data;
-        //console.log("Last node received: " + JSON.stringify(data.nodeLabel, null, 2));
     }
     response.status(200).send("Data received successfully");
 });

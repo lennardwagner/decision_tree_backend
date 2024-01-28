@@ -6,7 +6,6 @@ const trimQueryNodes = require('./TrimQuery')
 const url = 'mongodb://localhost:27017/testDB';
 const client = new MongoClient(url);
 
-//todo: QueryEdges and build a map which maps each node (key) to its most used child node (value)
 async function queryEdges() {
     let result = null;
     try {
@@ -28,9 +27,9 @@ async function queryEdges() {
     } finally {
         await client.close();
     }
-
     return result;
 }
+
 async function queryNodes() {
     let result = null;
     try {
@@ -42,9 +41,7 @@ async function queryNodes() {
         };
         result = await content.find({}, { projection }).toArray();
         const cleanedResult = result.flatMap(({ nodes }) => {
-            //console.log(Object.values(nodes))
             const dataValues = Object.values(nodes).map(x => Object.values(x.data));
-            //console.log(dataValues)
             return dataValues;
         });
         result = cleanedResult.flat()
@@ -54,12 +51,4 @@ async function queryNodes() {
     return result;
 }
 
-
-
-//   const test = await queryEdges().catch(console.dir);
-//    return test;
-//}
-//const result = queryEdges()
-//queryNodes().catch(console.dir);
 module.exports = {queryEdges, queryNodes};
-

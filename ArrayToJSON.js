@@ -1,3 +1,6 @@
+/** Returns a JSON object which can be used as a filter criterion
+ * for a mongoDB find() query
+ * */
 function ToJSON(data) {
     console.log(data)
     return data.map(filterRow => {

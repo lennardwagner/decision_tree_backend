@@ -20,5 +20,5 @@ function buildNodeOrder(nodeArray, sidebarObject) {
     })
     return JSON.stringify(nodeOrder, null, 2);
 }
-//buildNodeOrder(suggestions, sidebar)
+// buildNodeOrder(suggestions, sidebar)
 module.exports = buildNodeOrder;
