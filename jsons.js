@@ -6,13 +6,13 @@ const sidebar = {
         "category": "physiology"
     },
     "node2": {
-        "className": "Sex", // currently not used, I think (maybe for css)!
-        "content": "Sex", // only used to display name in sidebar!
+        "className": "Sex",
+        "content": "Sex",
         "data": {"Sex": ["male", "female"]},
         "category": "physiology"
     },
     "node3": {
-        "className": "Weight", // currently not used, I think (maybe for css)!
+        "className": "Weight",
         "content": "Weight",
         "data": {"Weight": [50,150]}, // Kg
         "category": "physiology"
