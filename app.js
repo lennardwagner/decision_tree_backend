@@ -23,12 +23,14 @@ let lastNode = ""
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });
+
 app.get("/status", (request, response) => {
     const status = {
         "Status": "Running"
     };
     response.send(status)
 });
+
 /** Returns the sidebar json to the front end */
 app.get("/sidebar", (request, response) => {
     response.send(sidebar)
@@ -63,22 +65,20 @@ app.post("/flow", async (request, response) => {
     const data = request.body;
     const trimmedData = trimStoredData(data);
     const trimmedDataJSON = JSON.parse(JSON.stringify(trimmedData));
-
+    // write trimmed tree to DB
     await writeToDB(file = trimmedDataJSON, collection = "decisionTree");
     const leavesAndPaths = LeafAndPathFinder(trimmedDataJSON, "1", [], []);
     // only Result nodes are valid leafs.
     // const validLeafs = leavesAndPaths.filter(item => item.path.length > 0 && item.path[item.path.length - 1][1] === "Results");
     const filterArray = ExtractLabelsFromPaths(trimmedDataJSON, leavesAndPaths.map((lap => lap.path)));
     const filterObject = ArrayToJson(filterArray);
-
     const resultObject = await resultQuery(filterObject)
-
     response.json(resultObject);
 })
+/** Writes tree construction steps to DB */
 app.post("/treeconstruction", async (request, response) => {
     const data = request.body;
     data.timestamp = String(new Date());
-    //console.log(data);
     writeToDB(file = data, collection = "TreeConstructionSteps");
     response.status(200).send("Data received successfully");
 })
