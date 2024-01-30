@@ -38,12 +38,12 @@ app.get("/sidebar", (request, response) => {
 
 /** Returns suggested nodes to the front end
  * !!! Currently not implemented in front end !!! */
-app.get("/suggestions", async (request, response) => {
+/* app.get("/suggestions", async (request, response) => {
     const result = await queryNodes();
     const suggestions = suggestionMap(result);
     const responseObject = buildNodeOrder(suggestions, sidebar);
     response.send(responseObject);
-});
+}); */
 
 /** Sends suggestion nodes to the front end if (!) at least 1 node has been dropped in the front end */
 app.get("/currentsuggestion", async (request, response) => {
