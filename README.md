@@ -6,7 +6,8 @@ Prerequisites: <br>
 * MongoDB v7.0.5
 * Mongosh v2.1.1
 
-Navigate to the project folder and
+Copy this repository to your local machine,
+make sure the project folder is your current working directory and then
 install all dependencies from the ``package.json`` by running:
 ```sh
 npm install
