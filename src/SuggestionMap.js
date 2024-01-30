@@ -7,7 +7,8 @@ testEdges = [
     [ 'Node 3', 'Gewicht' ],  [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ],
     [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ],
     [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ],
-    [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ], [ 'Node 2', 'Größe' ]];
+    [ 'Gewicht', 'Gewicht' ], [ 'Gewicht', 'Gewicht' ], [ 'Node 2', 'Größe' ]
+];
 
     function suggestionMap(data) {
     const hashMap = new Map();
