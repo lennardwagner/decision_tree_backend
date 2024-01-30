@@ -28,3 +28,5 @@ Ideally, these three collections should exist:
 * ``TreeConstructionSteps``
 * ``decisionTree``
 
+Once set up the ``Athletes`` collection must be filled with the ``example_athletes.json``
+found at ``src/data/mongoJSONS/example_athletes.json``
