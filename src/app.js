@@ -10,7 +10,7 @@ const buildNodeOrder = require('./SuggestionSidebar')
 const { LeafAndPathFinder, ExtractLabelsFromPaths} = require('./LeafAndPathFinder')
 const ArrayToJson = require('./ArrayToJSON')
 const resultQuery = require('./mongoResultQuery')
-const sidebar = require('./jsons')
+const sidebar = require('./data/jsons')
 
 const app = express();
 const port = 3001;
