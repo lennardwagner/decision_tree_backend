@@ -21,8 +21,10 @@ Start the backend by running ``src/app.js``. By default, the server is configure
 
 ## Database
 For the backend to work properly a local MongoDB instance
-must be installed. Currently, this connection string is used: ``mongodb://localhost:27017/testDB``
-to connect to a database called ``testDB`` but yours may differ.<br>
+must be installed which may be downloaded [here](https://www.mongodb.com/try/download/community).
+The backend is configured to connect to a database called ``testDB``.
+You may choose a different name but the name must be changed in the backend<br>
+Currently, this connection string is used: ``mongodb://localhost:27017/testDB``.
 Ideally, these three collections should exist:
 * ``Athletes``
 * ``TreeConstructionSteps``
