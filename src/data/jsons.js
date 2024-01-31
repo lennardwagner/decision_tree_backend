@@ -71,9 +71,9 @@ const sidebar = {
         "category": "training"
     },
     "node12": {
-        "className": "Vitamin D",
-        "content": "Vitamin D",
-        "data": {"Vitamin D": [20,50]}, // ng/mL
+        "className": "VitaminD",
+        "content": "VitaminD",
+        "data": {"VitaminD": [20,50]}, // ng/mL
         "category": "physiology"
     },
     "node13": {
