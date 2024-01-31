@@ -14,7 +14,8 @@
 "resting heartrate": 70,
 "30m": 4.7,
 "high jump": 155,
-"bench press": 55
+"bench press": 55,
+"peak heartrate": 166
 },
 {
 "name": "Smith",
@@ -31,7 +32,8 @@
 "resting heartrate": 75,
 "30m": 4.2,
 "high jump": 180,
-"bench press": 90
+"bench press": 90,
+"peak heartrate": 152
 },
 {
 "name": "Garcia",
@@ -48,7 +50,8 @@
 "resting heartrate": 65,
 "30m": 5.0,
 "high jump": 140,
-"bench press": 60
+"bench press": 60,
+"peak heartrate": 150
 },
 {
 "name": "Jones",
@@ -65,7 +68,8 @@
 "resting heartrate": 68,
 "30m": 4.5,
 "high jump": 150,
-"bench press": 70
+"bench press": 70,
+"peak heartrate": 170
 },
 {
 "name": "Kim",
@@ -82,7 +86,8 @@
 "resting heartrate": 72,
 "30m": 4.8,
 "high jump": 135,
-"bench press": 65
+"bench press": 65,
+"peak heartrate": 190
 },
 {
 "name": "Martinez",
@@ -99,7 +104,8 @@
 "resting heartrate": 73,
 "30m": 4.3,
 "high jump": 160,
-"bench press": 75
+"bench press": 75,
+"peak heartrate": 155
 },
 {
 "name": "Nguyen",
@@ -116,7 +122,8 @@
 "resting heartrate": 69,
 "30m": 4.6,
 "high jump": 145,
-"bench press": 68
+"bench press": 68,
+"peak heartrate": 177
 },
 {
 "name": "Fernandez",
@@ -133,7 +140,8 @@
 "resting heartrate": 68,
 "30m": 4.9,
 "high jump": 170,
-"bench press": 58
+"bench press": 58,
+"peak heartrate": 165
 },
 {
 "name": "Wang",
@@ -150,7 +158,8 @@
 "resting heartrate": 71,
 "30m": 4.4,
 "high jump": 125,
-"bench press": 80
+"bench press": 80,
+"peak heartrate": 150
 },
 {
 "name": "Müller",
@@ -167,7 +176,8 @@
 "resting heartrate": 67,
 "30m": 4.6,
 "high jump": 150,
-"bench press": 70
+"bench press": 70,
+"peak heartrate": 159
 },
 {
 "name": "Brown",
@@ -184,7 +194,8 @@
 "resting heartrate": 78,
 "30m": 4.0,
 "high jump": 175,
-"bench press": 85
+"bench press": 85,
+"peak heartrate": 180
 },
 {
 "name": "Choi",
@@ -201,7 +212,8 @@
 "resting heartrate": 68,
 "30m": 5.2,
 "high jump": 130,
-"bench press": 60
+"bench press": 60,
+"peak heartrate": 185
 },
 {
 "name": "Ali",
@@ -218,7 +230,8 @@
 "resting heartrate": 72,
 "30m": 4.5,
 "high jump": 140,
-"bench press": 75
+"bench press": 75,
+"peak heartrate": 173
 },
 {
 "name": "Lopez",
@@ -235,7 +248,8 @@
 "resting heartrate": 73,
 "30m": 4.3,
 "high jump": 160,
-"bench press": 75
+"bench press": 75,
+"peak heartrate": 169
 },
 {
 "name": "Kim",
@@ -252,7 +266,8 @@
 "resting heartrate": 67,
 "30m": 4.8,
 "high jump": 140,
-"bench press": 55
+"bench press": 55,
+"peak heartrate": 164
 },
 {
 "name": "Abe",
@@ -269,7 +284,8 @@
 "resting heartrate": 82,
 "30m": 5.5,
 "high jump": 120,
-"bench press": 100
+"bench press": 100,
+"peak heartrate": 199
 },
 {
 "name": "Andersen",
@@ -286,7 +302,8 @@
 "resting heartrate": 75,
 "30m": 4.2,
 "high jump": 160,
-"bench press": 80
+"bench press": 80,
+"peak heartrate": 189
 },
 {
 "name": "Park",
@@ -303,7 +320,8 @@
 "resting heartrate": 69,
 "30m": 4.6,
 "high jump": 145,
-"bench press": 68
+"bench press": 68,
+"peak heartrate": 180
 },
 {
 "name": "Kumar",
@@ -320,7 +338,8 @@
 "resting heartrate": 71,
 "30m": 4.4,
 "high jump": 130,
-"bench press": 85
+"bench press": 85,
+"peak heartrate": 191
 },
 {
 "name": "Chen",
@@ -337,7 +356,8 @@
 "resting heartrate": 68,
 "30m": 4.7,
 "high jump": 150,
-"bench press": 70
+"bench press": 70,
+"peak heartrate": 158
 },
 {
 "name": "Gomez",
@@ -354,7 +374,8 @@
 "resting heartrate": 70,
 "30m": 4.5,
 "high jump": 140,
-"bench press": 80
+"bench press": 80,
+"peak heartrate": 170
 },
 {
 "name": "Nakamura",
@@ -371,7 +392,8 @@
 "resting heartrate": 68,
 "30m": 4.8,
 "high jump": 135,
-"bench press": 70
+"bench press": 70,
+"peak heartrate": 171
 },
 {
 "name": "Santos",
@@ -388,6 +410,7 @@
 "resting heartrate": 72,
 "30m": 4.4,
 "high jump": 150,
-"bench press": 75
+"bench press": 75,
+"peak heartrate": 184
 }
 ]
